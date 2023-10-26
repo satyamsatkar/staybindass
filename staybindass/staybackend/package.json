@@ -1,0 +1,22 @@
+{
+  "name": "staybackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon Server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.18.2",
+    "md5": "^2.3.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.22",
+    "object-hash": "^3.0.0"
+  }
+}
