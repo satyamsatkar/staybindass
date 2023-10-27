@@ -31,6 +31,8 @@ const HotelMenu = () => {
   const [dateRange, setDateRange] = useState([]);
   const [days , setdays] = useState(0);
 
+  
+
   const handleChange = (dates) => {
     if (dates && dates.length === 2) {
       const startDate = dates[0];
@@ -63,7 +65,10 @@ const HotelMenu = () => {
   };
 
   const sanitizedData = DOMPurify.sanitize(villa.overview);
-
+  const security = villa.security;
+  const rules = villa.rules;
+  const policies = villa.policies;
+  // console.log(villa.policies,"policies");
   const Navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -207,8 +212,22 @@ useEffect(()=>{
   getImages();
 }, [])
   
+function decodeHTMLEntities(text) {
+  if(text){
 
+    return text.replace(/&amp;/g, '&')
+               .replace(/&lt;/g, '<')
+               .replace(/&gt;/g, '>')
+               .replace(/&quot;/g, '"')
+               .replace(/&#39;/g, "'")
+               .replace(/&#x2F;/g, '/');
+  }
+  else{
+    fetchJson();
+  }
+}
 
+// console.log(decodeHTMLEntities(sanitizedData));
 
   return (
     <>
@@ -300,7 +319,7 @@ useEffect(()=>{
             </div>
             <h2>Overview</h2>
             <ul className='overview'>
-              <p dangerouslySetInnerHTML={{ __html: sanitizedData.replace(/<[^>]+>/g, '') }}></p>
+              <p dangerouslySetInnerHTML={{ __html:  decodeHTMLEntities(sanitizedData)}}></p>
               <p id='hideshow' className='readmore'>
                 Read More
               </p>
@@ -434,40 +453,14 @@ useEffect(()=>{
             </ul>
 
             <div className='tab-content' id='pills-tabContent'>
-              <div className='tab-pane fade show active ' id='pills-home' role='tabpanel' aria-labelledby='pills-home-tab' tabIndex='0'>
-                <p>Check-in after : 1PM</p>
-                <p>Check-out before : 10AM</p>
-                <ul>
-                  <li>Outside food is not allowed in the villa.</li>
-                  <li>Guests are not allowed to access the kitchen except for infants with prior permission.</li>
-                  <li>Guests cannot invite other guests and day visitors during their stay.</li>
-                  <li>Bachelor groups & stag parties are not allowed.</li>
-                  <li>We do not encourage parties and late-night revelry. Loud music is not permitted beyond 10 pm.</li>
-                  <li>Consumption of alcohol is permitted only within limits.</li>
-                  <li>Illegal activities including but not limited to carrying/consuming drugs/narcotics and carrying firearms/weapons are prohibited on the property. Management reserves the right to report any such activities to local authorities</li>
-                  <li>This villa is pet-friendly but pets are not allowed beyond the verandah.</li>
-                  <li>Considering the unique location of the villa, Internet connectivity can get affected due to falling of trees, heavy rains or other causes</li>
-                </ul>
+              <div className='tab-pane fade show active ' id='pills-home' role='tabpanel' aria-labelledby='pills-home-tab' tabIndex='0' dangerouslySetInnerHTML={{__html : decodeHTMLEntities(rules)}}>
+          
               </div>
-              <div className='tab-pane fade' id='pills-profile' role='tabpanel' aria-labelledby='pills-profile-tab' tabIndex='0'>
-                <ul>
-                  <li>Cancellation policy : Moderate</li>
-                  <li>In case a Guest has booked online on the website without any assistance from the Call Center, he/ she is entitled to a 12 hours FREE Cancellation policy from time of booking. Refunds into your bank accounts usually take 5-7 working days. This does not apply to a booking where Check-in date is 7 days from the date of confirmation of booking.</li>
-                  <li>A Guest is entitled to a refund of 75% if he/she cancels the confirmed booking upto 15 days before the Date of Check-In (before 1 PM).</li>
-                  <li>A Guest is entitled to a refund of 50% if he/she cancels the confirmed booking upto 7 days before the Date of Check-In (before 1 PM).</li>
-                  <li>If the Guest cancels within 7 days of the Date of Check-In, he/she is entitled to no refund.</li>
-                  <li>If the Guest has made a partial payment, he/she is entitled to no refund whatsoever.</li>
-                  <li>This villa is pet-friendly but pets are not allowed beyond the verandah.</li>
-                  <li>Considering the unique location of the villa, Internet connectivity can get affected due to falling of trees, heavy rains or other causes</li>
-                </ul>
+              <div className='tab-pane fade' id='pills-profile' role='tabpanel' aria-labelledby='pills-profile-tab' tabIndex='0' dangerouslySetInnerHTML={{__html: decodeHTMLEntities(security)}}>
+                
               </div>
-              <div className='tab-pane fade' id='pills-contact' role='tabpanel' aria-labelledby='pills-contact-tab' tabIndex='0'>
-                <ul>
-                  <li>As much as the luxury and warmth of the villa lulls you into rest, don’t miss out on traveling to Bhigwan, where flamingos come and settle down during the winter season. The sight is mesmerising to behold and just 25 minutes from the property.</li>
-                  <li>While the approach to the home has plenty of jaggery factories, and one can also plan a trip to see how they work, the rest of the property is surrounded by agricultural farms and local animals, rustic sounds that welcome you through the day.</li>
-                  <li>This villa is pet-friendly but pets are not allowed beyond the verandah.</li>
-                  <li>Considering the unique location of the villa, Internet connectivity can get affected due to falling of trees, heavy rains or other causes</li>
-                </ul>
+              <div className='tab-pane fade' id='pills-contact' role='tabpanel' aria-labelledby='pills-contact-tab' tabIndex='0' dangerouslySetInnerHTML={{__html : decodeHTMLEntities(policies)}}>
+                
               </div>
 
               <div className='tab-pane fade' id='pills-disabled' role='tabpanel' aria-labelledby='pills-disabled-tab' tabIndex='0'>
