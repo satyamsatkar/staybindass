@@ -12,7 +12,6 @@ import HotelMenu from './HotelMenu';
 import ManageProfile from './ManageProfile';
 import ListProperty from './ListProperty';
 import LoginPage from './LoginPage';
-import { Provider } from 'react-redux';
 
 import ChangePass from './ChangePass';
 import ContactUs from './ContactUs';

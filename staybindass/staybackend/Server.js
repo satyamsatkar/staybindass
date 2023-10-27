@@ -32,13 +32,6 @@ app.get('/', (req, res) => {
   return res.json('from the backend side');
 });
 
-// const db = sql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: '',
-//   database: 'staybindass',
-// });
-
 db.connect((err) => {
   if (err) {
     console.warn('err');
