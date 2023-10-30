@@ -342,7 +342,7 @@ exports.GetCurrentDeal = (req, res, next) => {
   var options = { weekday: 'long' };
   var currentDay = currentDate.toLocaleDateString('en-US', options);
   console.log(currentDay);
-  const sql = 'SELECT ap.id,ap.title,ap.slug,app.property_price,night,pm.pool,cm.city,uploadimage,villaQuantity,minguest,maxguest,address,slug,r_type,minguest FROM addproperty as ap left join awt_property_price as app on app.property_id=ap.id  left join city_master as cm on ap.city = cm.id left join night_master as nm on nm.id = ap.nights left join awt_states as dm on dm.id=ap.state left join pool_master as pm on pm.id=ap.pool  WHERE ap.sale_status = 0 and ap.deleted = 0 and  app.select_date = ?'
+  const sql = 'SELECT ap.id,ap.title,ap.slug,app.property_price,night,pm.pool,cm.city,uploadimage,villaQuantity,minguest,maxguest,address,slug,r_type,minguest FROM addproperty as ap left join awt_property_price as app on app.property_id=ap.id  left join city_master as cm on ap.city = cm.id left join night_master as nm on nm.id = ap.nights left join awt_states as dm on dm.id=ap.state left join pool_master as pm on pm.id=ap.pool  WHERE ap.sale_status = 0 and ap.deleted != 1 and  app.select_date = ?'
 
 
   // const sql = 'SELECT * from awt_property_price as app left join addproperty as ap on app.property_id = ap.id left join city_master as cm on ap.city = cm.id left join night_master as nm on nm.id = ap.nights left join awt_states as dm on dm.id=ap.state left join pool_master as pm on pm.id=ap.pool WHERE app.deleted = 0 AND select_date = ?';
